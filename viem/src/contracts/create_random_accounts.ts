@@ -1,3 +1,5 @@
+import { generatePrivateKey, privateKeyToAccount } from "viem/accounts";
+
 const {
   english,
   generateMnemonic,
@@ -8,20 +10,20 @@ const { createObjectCsvWriter } = require("csv-writer");
 interface Account {
   id: number;
   address: string;
-  mnemonic: string;
+  privateKey: string;
 }
 
 function createRandomAccounts() {
   const accounts: Account[] = [];
 
   for (let i = 0; i < 10; i++) {
-    const mnemonic = generateMnemonic(english);
-    const account = mnemonicToAccount(mnemonic);
+    const pk = generatePrivateKey();
+    const account = privateKeyToAccount(pk);
 
     accounts.push({
       id: i,
       address: account.address,
-      mnemonic: mnemonic,
+      privateKey: pk,
     });
   }
 
@@ -34,7 +36,7 @@ const saveAccountsToCSV = async (accounts: Account[]) => {
     header: [
       { id: "id", title: "Index" },
       { id: "address", title: "Address" },
-      { id: "mnemonic", title: "Mnemonic" },
+      { id: "privateKey", title: "Private Key" },
     ],
   });
 
