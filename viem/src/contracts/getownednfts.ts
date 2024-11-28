@@ -1,17 +1,16 @@
-import { createThirdwebClient } from "thirdweb";
-import { getOwnedTokenIds } from "thirdweb/extensions/erc721";
-import { lineaSepolia } from "viem/chains";
+import { getOwnedNFTs } from "thirdweb/extensions/erc721";
+import { polygonZkEvmCardona } from "viem/chains";
 import client from "../lib/client";
 
 async function fetchOwnedNFTS() {
   try {
-    const ownedNFTs = await getOwnedTokenIds({
+    const ownedNFTs = await getOwnedNFTs({
       contract: {
         client: client,
-        address: "0x354015c26F39eB893e0Eb2FB185F295B2C27e029",
+        address: "0xaC533ADD8Be2B9D79Ea0Be292b169F80dAd3695a",
         chain: {
-          id: lineaSepolia.id,
-          rpc: lineaSepolia.rpcUrls.default.http[0],
+          id: polygonZkEvmCardona.id,
+          rpc: polygonZkEvmCardona.rpcUrls.default.http[0],
         },
       },
       owner: "0x3BcdbD203c483eE34E275adB1EF7447376a70Cd0",
